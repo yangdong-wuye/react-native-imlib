@@ -1,0 +1,54 @@
+aliases:
+  - &android
+    components:
+      - build-tools-28.0.3
+      - android-28
+      - extra-android-m2repository
+      - extra-android-support
+
+  - &android-cache
+    directories:
+      - ~/.npm
+      - ~/.gradle/caches/modules-2
+      - ~/.gradle/wrapper
+
+  - &ios-cache
+    directories:
+      - ~/.npm
+      - ~/.rncache
+      - ~/Library/Caches/Yarn
+
+jobs:
+  include:
+    - stage: "build test for example"
+      language: android
+      android: *android
+      before_cache:
+        - rm ~/.gradle/caches/modules-2/modules-2.lock
+      cache: *android-cache
+      script:
+        - nvm install node
+        - npm i
+        - npm i typescript
+        - npm run build
+        - cd android
+        - TERM=dumb ./gradlew build
+        - ls -lh app/build/outputs/apk/debug
+        - ls -lh app/build/outputs/apk/release
+
+    - stage: "build test for example"
+      language: objective-c
+      os: osx
+      osx_image: xcode11.3
+      cache: *ios-cache
+      before_install:
+      script:
+        - npm i
+        - npm i typescript
+        - npm run build
+        - cd ios && pod install && cd ..
+        - npm run run-ios
+
+stages:
+  - name: "build test for example"
+    if: branch = master
