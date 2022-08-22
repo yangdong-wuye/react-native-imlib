@@ -30,7 +30,7 @@
     "prepare": "bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
-    "pods": "cd example && pod-install --quiet",
+    "pods": "pod-install --quiet"
   },
   "keywords": [
     "react-native",
