@@ -51,6 +51,7 @@ repositories {
     google()
     mavenCentral()
     jcenter()
+    maven { url 'http://maven.rongcloud.cn/repository/maven-releases/' }
 }
 
 dependencies {
