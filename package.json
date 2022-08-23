@@ -1,5 +1,5 @@
 {
-  "name": "@rongcloud/react-native-imlib",
+  "name": "@wuye/react-native-imlib",
   "description": "React Native RongCloud IMLib",
   "version": "5.1.3-release.6",
   "main": "lib/commonjs/index",
@@ -29,8 +29,8 @@
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "prepare": "bob build",
     "release": "release-it",
-    "example": "yarn --cwd example",
-    "pods": "pod-install --quiet"
+    "pods": "pod-install --quiet",
+    "bootstrap": "yarn && yarn pods"
   },
   "keywords": [
     "react-native",
